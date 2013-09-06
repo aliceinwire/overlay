@@ -1,6 +1,53 @@
 # ChangeLog for net-analyzer/zabbix
 # Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/zabbix/ChangeLog,v 1.118 2013/02/22 02:45:53 mattm Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/zabbix/ChangeLog,v 1.127 2013/07/19 04:27:56 mattm Exp $
+
+  19 Jul 2013; Matthew Marlowe <mattm@gentoo.org> files/2.0/init.d/zabbix-proxy:
+  Minor tweak for bug 460562 - zabbix_proxy init file.
+
+  24 Jun 2013; Matthew Marlowe <mattm@gentoo.org> zabbix-2.0.6-r5.ebuild:
+  Removing package mask for 2.0.6-r5, it has successfully completed initial
+  testing.
+
+*zabbix-2.0.6-r5 (23 Jun 2013)
+
+  23 Jun 2013; Matthew Marlowe <mattm@gentoo.org> +zabbix-2.0.6-r5.ebuild,
+  -zabbix-2.0.6-r1.ebuild, -zabbix-2.0.6-r2.ebuild, -zabbix-2.0.6-r3.ebuild,
+  -zabbix-2.0.6-r4.ebuild, -zabbix-2.0.6.ebuild:
+  Fix for bug #450742 - Newer versions of curl are incompatible with zabbix
+  2.0.x until upstream makes fixes (been waiting 3+ months for fix).
+
+*zabbix-2.0.6-r4 (22 Jun 2013)
+
+  22 Jun 2013; Matthew Marlowe <mattm@gentoo.org> +zabbix-2.0.6-r4.ebuild:
+  Fix for bug #456850 - Allow non-standard AR/RANLIB if user specified.
+
+*zabbix-2.0.6-r3 (06 May 2013)
+
+  06 May 2013; Matthew Marlowe <mattm@gentoo.org> +files/2.0/zabbix_proxy.conf,
+  +zabbix-2.0.6-r3.ebuild:
+  Bug fix #460566
+
+*zabbix-2.0.6-r2 (06 May 2013)
+
+  06 May 2013; Matthew Marlowe <mattm@gentoo.org>
+  +files/2.0/init.d/zabbix-proxy, +zabbix-2.0.6-r2.ebuild:
+  Fix for bug #460562
+
+  06 May 2013; Matthew Marlowe <mattm@gentoo.org> -zabbix-1.8.16.ebuild:
+  Per QA Bug #445944, remove zabbix 1.8.x ebuilds from tree.
+
+*zabbix-2.0.6-r1 (06 May 2013)
+
+  06 May 2013; Matthew Marlowe <mattm@gentoo.org>
+  +files/2.0/patches/zbx282.patch, +zabbix-2.0.6-r1.ebuild:
+  Fix for bug #465376 which addresses zabbix upstream bug #282 - "lm_sensors
+  compatibility with recent linux kernels".
+
+*zabbix-2.0.6 (27 Apr 2013)
+
+  27 Apr 2013; Matthew Marlowe <mattm@gentoo.org> +zabbix-2.0.6.ebuild:
+  First draft of bump for Zabbix 2.0.6
 
   22 Feb 2013; Matthew Marlowe <mattm@gentoo.org> zabbix-2.0.5.ebuild:
   Fix Bug #457674 in zabbix 2.0.5, unnecessary application of zabbix 6074 patch.

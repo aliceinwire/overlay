@@ -1,12 +1,12 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/zabbix/zabbix-2.0.5.ebuild,v 1.3 2013/02/22 02:45:53 mattm Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/zabbix/zabbix-2.0.6-r5.ebuild,v 1.2 2013/06/24 22:59:25 mattm Exp $
 
 EAPI="2"
 
 # needed to make webapp-config dep optional
 WEBAPP_OPTIONAL="yes"
-inherit flag-o-matic webapp depend.php autotools java-pkg-opt-2 user
+inherit flag-o-matic webapp depend.php autotools java-pkg-opt-2 user toolchain-funcs
 
 DESCRIPTION="ZABBIX is software for monitoring of your applications, network and servers."
 HOMEPAGE="http://www.zabbix.com/"
@@ -15,7 +15,7 @@ SRC_URI="http://prdownloads.sourceforge.net/zabbix/${MY_P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 WEBAPP_MANUAL_SLOT="yes"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~x86 ~amd64"
 IUSE="agent java curl frontend ipv6 jabber ldap mysql openipmi oracle postgres proxy server ssh snmp sqlite iodbc odbc static"
 
 COMMON_DEPEND="snmp? ( net-analyzer/net-snmp )
@@ -29,7 +29,7 @@ COMMON_DEPEND="snmp? ( net-analyzer/net-snmp )
 	postgres? ( >=dev-db/postgresql-base-8.3.0 )
 	oracle? ( >=dev-db/oracle-instantclient-basic-10.0.0.0 )
 	jabber? ( dev-libs/iksemel )
-	curl? ( net-misc/curl )
+	curl? ( <=net-misc/curl-7.27 )
 	openipmi? ( sys-libs/openipmi )
 	ssh? ( net-libs/libssh2 )
 	java? ( >=virtual/jdk-1.4 )
@@ -68,6 +68,7 @@ java_prepare() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}/2.0/patches/zbx282.patch"
 	eautoreconf
 }
 
@@ -296,12 +297,12 @@ src_install() {
 
 	if use proxy; then
 		doinitd \
-			"${FILESDIR}/1.6.6"/init.d/zabbix-proxy
+			"${FILESDIR}/2.0"/init.d/zabbix-proxy
 		dosbin \
 			src/zabbix_proxy/zabbix_proxy
 		insinto /etc/zabbix
 		doins \
-			"${FILESDIR}/1.6.6"/zabbix_proxy.conf
+			"${FILESDIR}/2.0"/zabbix_proxy.conf
 		dodir \
 			/usr/share/zabbix
 		insinto /usr/share/zabbix
@@ -386,4 +387,10 @@ src_install() {
 	   fowners -R zabbix:zabbix /${ZABBIXJAVA_BASE}
 	fi
 
+}
+
+src_compile() {
+	if [ -f Makefile ] || [ -f GNUmakefile ] || [ -f makefile ]; then
+		emake AR="$(tc-getAR)" RANLIB="$(tc-getRANLIB)" || die "emake failed"
+	fi
 }

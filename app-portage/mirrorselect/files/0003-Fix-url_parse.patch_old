@@ -1,0 +1,11 @@
+--- a/mirrorselect/selectors.py_backup	2013-09-01 13:18:09.000000000 +0900
++++ b/mirrorselect/selectors.py	2013-09-01 14:05:44.000000000 +0900
+@@ -329,7 +329,7 @@ class Deep(object):
+ 		else:
+ 			url = url + '/distfiles/mirrorselect-test'
+ 
+-		url_parts = url_parse(url)
++		url_parts = url_parse.urlparse(url)
+ 
+ 		class TimeoutException(Exception):
+ 			pass
