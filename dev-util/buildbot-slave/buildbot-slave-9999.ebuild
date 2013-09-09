@@ -8,7 +8,9 @@ SUPPORT_PYTHON_ABIS="1"
 RESTRICT_PYTHON_ABIS="3.* *-jython"
 DISTUTILS_SRC_TEST="trial buildslave"
 DISTUTILS_DISABLE_TEST_DEPENDENCY="1"
+EGIT_REPO_URI="https://github.com/buildbot/buildbot.git"
 
+[[ ${PV} = 9999 ]] && inherit git-2
 inherit distutils readme.gentoo user
 
 DESCRIPTION="BuildBot Slave Daemon"
@@ -16,7 +18,7 @@ HOMEPAGE="http://trac.buildbot.net/ http://code.google.com/p/buildbot/ http://py
 
 MY_PV="${PV/_p/p}"
 MY_P="${PN}-${MY_PV}"
-SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${MY_P}.tar.gz"
+[[ ${PV} = 9999 ]] || SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${MY_P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -47,7 +49,13 @@ pkg_setup() {
 		build slave, just copy the scripts."
 }
 
+src_compile() {
+	[[ ${PV} = 9999 ]] && cd slave/
+	distutils_src_compile
+}
+
 src_install() {
+	[[ ${PV} = 9999 ]] && cd slave/
 	distutils_src_install
 
 	doman docs/buildslave.1
@@ -59,6 +67,7 @@ src_install() {
 }
 
 pkg_postinst() {
+	[[ ${PV} = 9999 ]] && cd slave/
 	distutils_pkg_postinst
 	readme.gentoo_print_elog
 }

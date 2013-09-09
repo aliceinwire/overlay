@@ -47,7 +47,6 @@ DEPEND="${DEPEND}
 	)"
 
 S="${WORKDIR}/${MY_P}"
-D="${PORTAGE_BUILDDIR}/master"
 
 pkg_setup() {
 	python_pkg_setup
