@@ -1,0 +1,10 @@
+--- /usr/portage/dev-python/py-freebsd/py-freebsd-0.9.3-r1.ebuild	2011-07-08 09:03:28.000000000 +0900
++++ py-freebsd-0.9.3-r1.ebuild	2013-08-26 15:37:32.000000000 +0900
+@@ -29,6 +29,7 @@ src_prepare() {
+ 	epatch "${FILESDIR}/fbsd7-netstat.patch"
+ 	epatch "${FILESDIR}/process-fix.patch"
+ 	epatch "${FILESDIR}/freebsd8_patch-src-jail.c"
++	epatch "${FILESDIR}/freebsd9_patch-src-sysctl.c.patch"
+ }
+ 
+ src_test() {
