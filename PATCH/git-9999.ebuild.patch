@@ -1,0 +1,20 @@
+--- /usr/portage/dev-vcs/git/git-9999.ebuild	2013-10-08 03:31:16.000000000 +0900
++++ dev-vcs/git/git-9999.ebuild	2013-10-14 01:46:21.000000000 +0900
+@@ -219,7 +219,7 @@ src_unpack() {
+ 
+ src_prepare() {
+ 	# bug #350330 - automagic CVS when we don't want it is bad.
+-	epatch "${FILESDIR}"/git-1.8.2-optional-cvs.patch
++	epatch "${FILESDIR}"/git-9999-optional-cvs.patch
+ 
+ 	sed -i \
+ 		-e 's:^\(CFLAGS =\).*$:\1 $(OPTCFLAGS) -Wall:' \
+@@ -437,7 +437,7 @@ src_install() {
+ 	# svnimport - use git-svn
+ 	# thunderbird-patch-inline - fixes thunderbird
+ 	for i in \
+-		blameview buildsystems ciabot continuous convert-objects fast-import \
++		buildsystems ciabot convert-objects fast-import \
+ 		hg-to-git hooks remotes2config.sh rerere-train.sh \
+ 		stats vim workdir \
+ 		; do
