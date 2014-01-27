@@ -47,9 +47,22 @@ SUGGESTED_RDEPEND="
 	dev-perl/Mail-Sendmail
 	dev-perl/Term-ReadLine-Gnu
 	dev-perl/XML-Simple
+	media-gfx/imagemagick[perl]
 "
 
-TEST_DEPEND="dev-perl/File-chdir"
+TEST_DEPEND="
+	dev-perl/File-chdir
+	dev-perl/File-ReadBackwards
+	dev-perl/File-MimeInfo
+	dev-perl/Net-OpenID-Consumer
+	dev-perl/HTML-LinkExtractor
+	dev-perl/HTML-Tree
+	dev-perl/XML-Twig
+	dev-perl/XML-Feed
+	dev-perl/RPC-XML
+	dev-vcs/cvs[server]
+	dev-vcs/cvsps
+"
 
 DEPEND="
 	>=dev-lang/perl-5.10
@@ -78,6 +91,7 @@ DEPEND="${DEPEND}
 SRC_TEST=do
 
 src_prepare() {
+	addpredict "/usr/lib/plan9/lib/" #bug 498444
 	sed -i 's,lib/ikiwiki,libexec/ikiwiki,' \
 		"${S}"/{IkiWiki.pm,Makefile.PL,doc/plugins/install.mdwn} || die
 #	if use w3m ; then
