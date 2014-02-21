@@ -67,7 +67,7 @@ java_prepare() {
 }
 
 src_prepare() {
-	#epatch "${FILESDIR}/2.2/patches/zbx7479.patch"
+	epatch "${FILESDIR}/2.2/patches/zbx7479.patch"
 	eautoreconf
 }
 
@@ -239,7 +239,7 @@ src_install() {
 		/var/lib/zabbix/alertscripts \
 		/var/lib/zabbix/externalscripts \
 		/var/log/zabbix
-		
+
 	keepdir \
 		/etc/zabbix \
 		/var/lib/zabbix \
@@ -258,7 +258,6 @@ src_install() {
 		fperms 0640 /etc/zabbix/zabbix_server.conf
 		dodir /usr/share/zabbix
 		cp -R "${S}/database/" "${D}"/usr/share/zabbix/
-
 	fi
 
 	if use proxy; then
@@ -269,6 +268,8 @@ src_install() {
 		insinto /etc/zabbix
 		doins \
 			"${FILESDIR}/2.2"/zabbix_proxy.conf
+		dodir /usr/share/zabbix
+		cp -R "${S}/database/" "${D}"/usr/share/zabbix/
 	fi
 
 	if use agent; then
