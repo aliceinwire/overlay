@@ -1,12 +1,12 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/zabbix/zabbix-2.2.0-r4.ebuild,v 1.2 2013/12/17 19:22:21 mattm Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/zabbix/zabbix-2.2.2_rc2-r2.ebuild,v 1.1 2014/02/15 12:09:53 pacho Exp $
 
 EAPI="5"
 
 # needed to make webapp-config dep optional
 WEBAPP_OPTIONAL="yes"
-inherit flag-o-matic webapp depend.php autotools java-pkg-opt-2 user toolchain-funcs
+inherit flag-o-matic webapp depend.php autotools java-pkg-opt-2 user systemd toolchain-funcs
 
 DESCRIPTION="ZABBIX is software for monitoring of your applications, network and servers."
 HOMEPAGE="http://www.zabbix.com/"
@@ -67,7 +67,6 @@ java_prepare() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/2.2/patches/zbx7479.patch"
 	eautoreconf
 }
 
@@ -256,8 +255,8 @@ src_install() {
 		dosbin src/zabbix_server/zabbix_server
 		fowners zabbix:zabbix /etc/zabbix/zabbix_server.conf
 		fperms 0640 /etc/zabbix/zabbix_server.conf
-		dodir /usr/share/zabbix
-		cp -R "${S}/database/" "${D}"/usr/share/zabbix/
+		systemd_dounit "${FILESDIR}/zabbix-server.service"
+		systemd_newtmpfilesd "${FILESDIR}/zabbix-server.tmpfiles" zabbix-server.conf
 	fi
 
 	if use proxy; then
@@ -268,8 +267,8 @@ src_install() {
 		insinto /etc/zabbix
 		doins \
 			"${FILESDIR}/2.2"/zabbix_proxy.conf
-		dodir /usr/share/zabbix
-		cp -R "${S}/database/" "${D}"/usr/share/zabbix/
+		systemd_dounit "${FILESDIR}/zabbix-proxy.service"
+		systemd_newtmpfilesd "${FILESDIR}/zabbix-proxy.tmpfiles" zabbix-proxy.conf
 	fi
 
 	if use agent; then
@@ -290,6 +289,8 @@ src_install() {
 		fperms 0640 \
 			/etc/zabbix/zabbix_agent.conf \
 			/etc/zabbix/zabbix_agentd.conf
+		systemd_dounit "${FILESDIR}/zabbix-agentd.service"
+		systemd_newtmpfilesd "${FILESDIR}/zabbix-agentd.tmpfiles" zabbix-agentd.conf
 	fi
 
 	fowners zabbix:zabbix \
