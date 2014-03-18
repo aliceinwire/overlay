@@ -1,0 +1,30 @@
+# ChangeLog for virtual/pypy
+# Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/virtual/pypy/ChangeLog,v 1.6 2014/03/12 09:27:43 mgorny Exp $
+
+  12 Mar 2014; Michał Górny <mgorny@gentoo.org> pypy-2.2.1.ebuild:
+  Add the subslot.
+
+*pypy-2.2.1 (12 Mar 2014)
+
+  12 Mar 2014; Michał Górny <mgorny@gentoo.org> +pypy-2.2.1.ebuild:
+  Add virtual for the new pypy.
+
+*pypy-2.0.2 (09 Oct 2013)
+
+  09 Oct 2013; Michał Górny <mgorny@gentoo.org> +pypy-2.0.2.ebuild:
+  Add virtual version for PyPy 2.0.2.
+
+  05 Sep 2013; Michał Górny <mgorny@gentoo.org> -pypy-1.9.ebuild:
+  Remove PyPy 1.9.
+
+  28 Jul 2013; Michał Górny <mgorny@gentoo.org> pypy-1.9.ebuild,
+  pypy-2.0.ebuild:
+  Require USE=ssl on old versions of PyPy for compatibility. Drop HOMEPAGE.
+
+*pypy-1.9 (27 Jul 2013)
+*pypy-2.0 (27 Jul 2013)
+
+  27 Jul 2013; Michał Górny <mgorny@gentoo.org> +metadata.xml, +pypy-1.9.ebuild,
+  +pypy-2.0.ebuild:
+  Introduce a virtual for pypy and pypy-bin.
