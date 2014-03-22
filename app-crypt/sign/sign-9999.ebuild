@@ -8,7 +8,13 @@ inherit toolchain-funcs eutils
 
 DESCRIPTION="File signing and signature verification utility"
 HOMEPAGE="http://swapped.cc/sign/"
-SRC_URI="http://swapped.cc/${PN}/files/${P}.tar.gz"
+if [[ ${PV} == 9999* ]]; then
+	inherit git-2
+	EGIT_REPO_URI="git://github.com/apankrat/${PN}.git"
+	EGIT_BRANCH="master"
+else
+	SRC_URI="http://swapped.cc/${PN}/files/${P}.tar.gz"
+fi
 
 LICENSE="BZIP2"
 SLOT="0"
@@ -19,7 +25,7 @@ RDEPEND=">=dev-libs/openssl-0.9.8"
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PV}-openssl-0.9.8.patch
+	#epatch "${FILESDIR}"/${PV}-openssl-0.9.8.patch
 	epatch "${FILESDIR}"/${PV}-as-needed.patch
 	# remove -g from CFLAGS, it happens to break the build on ppc-macos
 	sed -i -e 's/-g//' src/Makefile || die
@@ -32,6 +38,6 @@ src_compile() {
 src_install() {
 	dobin ${PN}
 	doman man/${PN}.1
-	dodoc README
+	dodoc README.md
 	dosym ${PN} /usr/bin/un${PN}
 }

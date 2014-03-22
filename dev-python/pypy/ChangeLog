@@ -126,7 +126,7 @@
   Add keywords.
 
   24 Dec 2012; Zac Medico <zmedico@gentoo.org> pypy-2.0_beta1.ebuild:
-  Add pypy2_0 to PYTHON_COMPAT, since it appears to work.
+  Add pypy pypy2_0 to PYTHON_COMPAT, since it appears to work.
 
 *pypy-2.0_beta1 (20 Dec 2012)
 

@@ -3,7 +3,7 @@
 # $Header: /var/cvsroot/gentoo-x86/dev-python/pexpect/pexpect-2.4-r1.ebuild,v 1.6 2014/02/16 19:51:35 vapier Exp $
 
 EAPI=5
-PYTHON_COMPAT=( python{2_6,2_7} pypy2_0 )
+PYTHON_COMPAT=( python{2_6,2_7} pypy pypy2_0 )
 
 inherit distutils-r1
 

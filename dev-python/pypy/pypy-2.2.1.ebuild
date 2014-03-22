@@ -4,7 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python2_7 pypy2_0 )
+PYTHON_COMPAT=( python2_7 pypy )
 inherit check-reqs eutils multilib multiprocessing pax-utils \
 	python-any-r1 toolchain-funcs versionator
 
