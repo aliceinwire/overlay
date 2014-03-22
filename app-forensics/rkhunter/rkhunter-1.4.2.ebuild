@@ -26,8 +26,7 @@ RDEPEND="
 S="${WORKDIR}/${P}/files"
 
 src_prepare() {
-	pass
-	#epatch "${FILESDIR}/${PN}.conf.patch"
+	epatch "${FILESDIR}/${PN}.conf.patch"
 }
 
 src_install() {

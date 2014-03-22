@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/app-benchmarks/tiobench/tiobench-0.3.3-r2.ebuild,v 1.6 2012/11/04 22:46:26 swegener Exp $
 
+EAPI=5
+
 inherit eutils toolchain-funcs
 
 DESCRIPTION="Portable, robust, fully-threaded I/O benchmark program"
