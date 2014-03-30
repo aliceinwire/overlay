@@ -13,7 +13,7 @@ HOMEPAGE="http://www.virtualenv.org/ http://pypi.python.org/pypi/virtualenv"
 SRC_URI="https://github.com/pypa/${PN}/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="MIT"
-KEYWORDS="alpha amd64 arm ia64 ppc ppc64 s390 sh sparc x86 ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-solaris"
 SLOT="0"
 IUSE="doc test"
 

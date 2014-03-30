@@ -19,6 +19,13 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	virtual/awk"
+	
+src_prepare() {
+	# fix dependency on ncurses[tinfo], #459484
+	sed \
+		-e "s:\(ncurses\):\1 tinfo:g" \
+		-i configure.in || die
+}
 
 src_compile() {
 	econf $(use_with pcre) || die "econf failed"
