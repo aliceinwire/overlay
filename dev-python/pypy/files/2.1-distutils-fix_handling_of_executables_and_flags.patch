@@ -334,3 +334,15 @@ http://bugs.python.org/issue1222585
          _CONFIG_VARS['platbase'] = _EXEC_PREFIX
          _CONFIG_VARS['projectbase'] = _PROJECT_BASE
  
+--- lib-python/2.7/distutils/sysconfig_pypy.py	2014-03-31 22:27:12.000000000 +0900
++++ lib-python/2.7/distutils/sysconfig_pypy.py.orig	2014-03-31 10:13:05.000000000 +0900
+@@ -17,7 +17,8 @@ import shlex
+ from distutils.errors import DistutilsPlatformError
+ 
+ 
+-PREFIX = os.path.normpath(sys.prefix)
++PREFIX = os.path.normpath(sys.prefix + '../../')
++print PREFIX
+ EXEC_PREFIX = os.path.normpath(sys.exec_prefix)
+ project_base = os.path.dirname(os.path.abspath(sys.executable))
+ python_build = False
