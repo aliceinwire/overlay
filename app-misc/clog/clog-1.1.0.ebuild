@@ -20,7 +20,7 @@ IUSE=""
 src_prepare() {
 	# use the correct directory locations
 	sed -i -e "s:/usr/local/share/doc/clog/rc:${EPREFIX}/usr/share/clog/rc:" \
-		doc/man/anomaly.1.in || die
+		doc/man/clog.1.in || die
 }
 
 src_configure() {

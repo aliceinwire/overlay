@@ -3,7 +3,7 @@
 
 EAPI=5
 
-EGIT_REPO_URI="git://tasktools.org/${PN}.git"
+EGIT_REPO_URI="https://git.tasktools.org/scm/ut/${PN}.git"
 [[ ${PV} = 9999 ]] && inherit git-2
 
 inherit eutils cmake-utils bash-completion-r1

@@ -341,8 +341,28 @@ http://bugs.python.org/issue1222585
  
  
 -PREFIX = os.path.normpath(sys.prefix)
-+PREFIX = os.path.normpath(sys.prefix + '../../')
++PREFIX = os.path.normpath(sys.prefix + '../../../')
 +print PREFIX
  EXEC_PREFIX = os.path.normpath(sys.exec_prefix)
  project_base = os.path.dirname(os.path.abspath(sys.executable))
  python_build = False
+--- pypy/interpreter/app_main.py.orig	2014-04-01 19:56:36.000000000 +0900
++++ pypy/interpreter/app_main.py	2014-04-01 19:57:58.000000000 +0900
+@@ -193,6 +193,8 @@ def _print_jit_help():
+ 
+ def print_version(*args):
+     print >> sys.stderr, "Python", sys.version
++    sys.prefix = '/usr/share/'
++    print >> sys.stderr, "Version", sys.prefix
+     raise SystemExit
+ 
+ 
+@@ -706,6 +708,8 @@ def setup_bootstrap_path(executable):
+         print >> sys.stderr, STDLIB_WARNING
+     else:
+         sys.path[:] = stdlib_path
++    sys.prefix = '/usr/share/'
++    print >> sys.stderr, "bootstrap_path", sys.prefix
+     # from this point on, we are free to use all the unicode stuff we want,
+     # This is important for py3k
+     sys.executable = executable
