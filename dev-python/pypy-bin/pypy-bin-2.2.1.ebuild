@@ -7,7 +7,7 @@ EAPI=5
 PYTHON_COMPAT=( python2_7 pypy{1_8,1_9,2_0} )
 inherit eutils multilib pax-utils python-any-r1 versionator
 
-BINHOST="http://dev.gentoo.org/~mgorny/dist/${PN}"
+BINHOST="http://pypy.aliceinwire.net/${PN}"
 
 DESCRIPTION="A fast, compliant alternative implementation of the Python language (binary package)"
 HOMEPAGE="http://pypy.org/"
