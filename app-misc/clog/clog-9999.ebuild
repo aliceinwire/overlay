@@ -31,5 +31,6 @@ src_configure() {
 }
 
 src_install() {
+	doman doc/man/clog.1.in
 	cmake-utils_src_install
 }
