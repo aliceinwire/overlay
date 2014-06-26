@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/app-benchmarks/tiobench/tiobench-0.3.3-r2.ebuild,v 1.6 2012/11/04 22:46:26 swegener Exp $
 
@@ -18,10 +18,7 @@ IUSE=""
 RDEPEND="dev-lang/perl"
 DEPEND="${RDEPEND}"
 
-src_unpack() {
-	unpack ${A}
-	cd "${S}"
-
+src_prepare() {
 	epatch "${FILESDIR}"/${PV}-column-description-fix.patch
 	epatch "${FILESDIR}"/${PV}-LDFLAGS.patch
 	epatch "${FILESDIR}"/${PV}-glibc-2.16.patch
