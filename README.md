@@ -14,3 +14,7 @@ dev-db/opendbx
 app-crypt/sign  
 net-misc/shmux  
 app-benchmarks/tiobench  
+
+Repoman status
+-------
+[![Build Status](https://travis-ci.org/aliceinwire/overlay.svg?branch=master)](https://travis-ci.org/aliceinwire/overlay)
