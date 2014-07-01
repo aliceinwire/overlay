@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
+	<herd>python</herd>
 	<maintainer>
-		<email>alice.ferrazzi@gmail.com</email>
-		<name>Alice Ferrazzi</name>
+		<email>mgorny@gentoo.org</email>
+		<name>Michał Górny</name>
 	</maintainer>
 	<use>
 		<flag name="sandbox">Enable sandboxing functionality</flag>
