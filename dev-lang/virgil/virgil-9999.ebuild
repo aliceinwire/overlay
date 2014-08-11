@@ -9,7 +9,7 @@ EGIT_REPO_URI="https://code.google.com/p/${PN}"
 
 inherit eutils bash-completion-r1
 
-DESCRIPTION="A lightweight multi-paradigm programming language."
+DESCRIPTION="A lightweight multi-paradigm programming language"
 HOMEPAGE="https://code.google.com/p/virgil/"
 #[[ ${PV} = 9999 ]] || SRC_URI="http://taskwarrior.org/download/${P}.tar.gz"
 
