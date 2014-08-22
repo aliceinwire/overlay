@@ -13,7 +13,7 @@ DESCRIPTION="A lightweight multi-paradigm programming language"
 HOMEPAGE="https://code.google.com/p/virgil/"
 #[[ ${PV} = 9999 ]] || SRC_URI="http://taskwarrior.org/download/${P}.tar.gz"
 
-LICENSE="MIT"
+LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~x64-macos"
 IUSE=""
