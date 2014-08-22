@@ -14,10 +14,10 @@ dev-db/opendbx
 app-crypt/sign  
 net-misc/shmux  
 app-benchmarks/tiobench
-
-also:
-virgilIII dev-lang/virgil
-dev-python/pylibssh2
+  
+also:  
+virgilIII dev-lang/virgil  
+dev-python/pylibssh2  
 
 Repoman status
 -------
