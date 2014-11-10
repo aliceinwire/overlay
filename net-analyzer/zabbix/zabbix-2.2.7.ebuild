@@ -1,6 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-analyzer/zabbix/zabbix-2.2.2_rc2-r2.ebuild,v 1.1 2014/02/15 12:09:53 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-analyzer/zabbix/zabbix-2.2.7.ebuild,v 1.2 2014/11/03 13:28:23 titanofold Exp $
 
 EAPI="5"
 
@@ -8,7 +8,7 @@ EAPI="5"
 WEBAPP_OPTIONAL="yes"
 inherit flag-o-matic webapp depend.php autotools java-pkg-opt-2 user systemd toolchain-funcs
 
-DESCRIPTION="ZABBIX is software for monitoring of your applications, network and servers."
+DESCRIPTION="ZABBIX is software for monitoring of your applications, network and servers"
 HOMEPAGE="http://www.zabbix.com/"
 MY_P=${P/_/}
 MY_PV=${PV/_/}
@@ -27,7 +27,7 @@ COMMON_DEPEND="snmp? ( net-analyzer/net-snmp )
 	)
 	mysql? ( >=virtual/mysql-5.0.3 )
 	sqlite? ( >=dev-db/sqlite-3.3.5 )
-	postgres? ( >=dev-db/postgresql-base-8.3.0 )
+	postgres? ( >=virtual/postgresql-8.3.0 )
 	oracle? ( >=dev-db/oracle-instantclient-basic-10.0.0.0 )
 	jabber? ( dev-libs/iksemel )
 	libxml2? ( dev-libs/libxml2 )
@@ -44,7 +44,6 @@ RDEPEND="${COMMON_DEPEND}
 	java?	(
 		>=virtual/jre-1.4
 		dev-java/slf4j-api
-		dev-java/json-simple
 	)
 	frontend? (
 		>=dev-lang/php-5.3.0[bcmath,ctype,sockets,gd,truetype,xml,session,xmlreader,xmlwriter,nls,sysvipc,unicode]
@@ -63,7 +62,6 @@ java_prepare() {
 	rm -v *.jar || die
 
 	java-pkg_jar-from slf4j-api
-	java-pkg_jar-from json-simple
 }
 
 src_prepare() {
@@ -255,6 +253,8 @@ src_install() {
 		dosbin src/zabbix_server/zabbix_server
 		fowners zabbix:zabbix /etc/zabbix/zabbix_server.conf
 		fperms 0640 /etc/zabbix/zabbix_server.conf
+		dodir /usr/share/zabbix
+		/bin/cp -R "${S}/database/" "${D}"/usr/share/zabbix/
 		systemd_dounit "${FILESDIR}/zabbix-server.service"
 		systemd_newtmpfilesd "${FILESDIR}/zabbix-server.tmpfiles" zabbix-server.conf
 	fi
@@ -267,6 +267,8 @@ src_install() {
 		insinto /etc/zabbix
 		doins \
 			"${FILESDIR}/2.2"/zabbix_proxy.conf
+		dodir /usr/share/zabbix
+		/bin/cp -R "${S}/database/" "${D}"/usr/share/zabbix/
 		systemd_dounit "${FILESDIR}/zabbix-proxy.service"
 		systemd_newtmpfilesd "${FILESDIR}/zabbix-proxy.tmpfiles" zabbix-proxy.conf
 	fi
@@ -342,7 +344,7 @@ src_install() {
 		src/zabbix_java/lib/logback-console.xml \
 		src/zabbix_java/lib/logback-core-0.9.27.jar \
 		src/zabbix_java/lib/logback.xml \
-		src/zabbix_java/lib/org-json-2010-12-28.jar \
+		src/zabbix_java/lib/android-json-4.3_r3.1.jar \
 		src/zabbix_java/lib/slf4j-api-1.6.1.jar
 	   exeinto /${ZABBIXJAVA_BASE}/
 	   doexe \
