@@ -1,0 +1,22 @@
+diff --git a/Makefile.PL b/Makefile.PL
+index 61fe336..312a148 100755
+--- a/Makefile.PL
++++ b/Makefile.PL
+@@ -63,7 +63,7 @@ docwiki:
+ perl_shebangs:
+ ifneq "$(PERL)" "/usr/bin/perl"
+ 	for file in $(shebang_scripts); do \
+-		$(SED) -e "1s|^#!/usr/bin/perl|#!$(PERL)|" < $$file > "$$file.new"; \
++		$(PERL) -pe "s|^#!/usr/bin/perl\b|#!$(PERL)| if 1" < $$file > "$$file.new"; \
+ 		[ -x $$file ] && chmod +x "$$file.new"; \
+ 		mv -f "$$file.new" $$file; \
+ 	done
+@@ -72,7 +72,7 @@ endif
+ perl_shebangs_clean:
+ ifneq "$(PERL)" "/usr/bin/perl"
+ 	for file in $(shebang_scripts); do \
+-		$(SED) -e "1s|^#!$(PERL)|#!/usr/bin/perl|" < $$file > "$$file.new"; \
++		$(PERL) -pe "s|^#!$(PERL)\b|#!/usr/bin/perl| if 1" < $$file > "$$file.new"; \
+ 		[ -x $$file ] && chmod +x "$$file.new"; \
+ 		mv -f "$$file.new" $$file; \
+ 	done

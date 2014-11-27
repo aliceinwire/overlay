@@ -87,6 +87,7 @@ DEPEND="${DEPEND}
 SRC_TEST=do
 
 src_prepare() {
+	epatch "${FILESDIR}"/${PV}-match-word-boundary-for-get-perl-version.patch
 	#bug 498444 /usr/lib/plan9/lib/fortunes.index
 	addpredict "/usr/lib/plan9/lib/fortunes"
 
