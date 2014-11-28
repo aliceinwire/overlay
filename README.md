@@ -14,6 +14,9 @@ dev-db/opendbx
 app-crypt/sign  
 net-misc/shmux  
 app-benchmarks/tiobench
+sys-apps/epoch
+net-irc/weechat
+dev-embedded/arduino
   
 also:  
 virgilIII dev-lang/virgil  
