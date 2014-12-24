@@ -13,7 +13,7 @@ SRC_URI="http://www.linuxnetworks.de/opendbx/download/${P}.tar.gz"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="bindist firebird +mysql oracle postgres sqlite sqlite3"
+IUSE="bindist firebird +mysql oracle postgres sqlite sqlite3 +sybase"
 
 DEPEND="mysql? ( virtual/mysql )
 	postgres? ( dev-db/postgresql-base )
@@ -26,7 +26,7 @@ RDEPEND="${DEPEND}"
 REQUIRED_USE="bindist? ( !firebird )"
 
 pkg_setup() {
-	if ! ( use firebird || use mysql || use oracle || use postgres || use sqlite || use sqlite3 )
+	if ! ( use firebird || use mysql || use oracle || use postgres || use sqlite || use sqlite3 || use sybase )
 	then
 		ewarn "You should enable at least one of the following USE flags:"
 		ewarn "firebird, mysql, oracle, postgres, sqlite or sqlite3"
@@ -51,6 +51,7 @@ src_configure() {
 	use postgres && backends="${backends} pgsql"
 	use sqlite && backends="${backends} sqlite"
 	use sqlite3 && backends="${backends} sqlite3"
+	use sybase && backends="${backends} sybase"
 
 	econf --with-backends="${backends}" || die "econf failed"
 }

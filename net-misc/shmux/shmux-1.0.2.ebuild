@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-misc/shmux/shmux-1.0.2.ebuild,v 1.6 2013/04/17 07:59:47 ulm Exp $
 EAPI=5
@@ -19,7 +19,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	virtual/awk"
-	
+
 src_prepare() {
 	# fix dependency on ncurses[tinfo], #459484
 	sed \
@@ -27,8 +27,11 @@ src_prepare() {
 		-i configure.in || die
 }
 
-src_compile() {
+src_configure() {
 	econf $(use_with pcre) || die "econf failed"
+}
+
+src_compile() {
 	emake || die "emake failed"
 }
 
