@@ -1,7 +1,7 @@
 http://bugs.python.org/issue1222585
 
---- lib-python/2.7/distutils/cygwinccompiler.py
-+++ lib-python/2.7/distutils/cygwinccompiler.py
+--- a/lib-python/2.7/distutils/cygwinccompiler.py
++++ b/lib-python/2.7/distutils/cygwinccompiler.py
 @@ -135,9 +135,13 @@
          self.set_executables(compiler='gcc -mcygwin -O -Wall',
                               compiler_so='gcc -mcygwin -mdll -O -Wall',
@@ -49,8 +49,8 @@ http://bugs.python.org/issue1222585
          # Maybe we should also append -mthreads, but then the finished
          # dlls need another dll (mingwm10.dll see Mingw32 docs)
          # (-mthreads: Support thread-safe exception handling on `Mingw32')
---- lib-python/2.7/distutils/emxccompiler.py
-+++ lib-python/2.7/distutils/emxccompiler.py
+--- a/lib-python/2.7/distutils/emxccompiler.py
++++ b/lib-python/2.7/distutils/emxccompiler.py
 @@ -65,8 +65,12 @@
          # XXX optimization, warnings etc. should be customizable.
          self.set_executables(compiler='gcc -Zomf -Zmt -O3 -fomit-frame-pointer -mprobe -Wall',
@@ -80,8 +80,8 @@ http://bugs.python.org/issue1222585
              except DistutilsExecError, msg:
                  raise CompileError, msg
  
---- lib-python/2.7/distutils/sysconfig_cpython.py
-+++ lib-python/2.7/distutils/sysconfig_cpython.py
+--- a/lib-python/2.7/distutils/sysconfig_cpython.py
++++ b/lib-python/2.7/distutils/sysconfig_cpython.py
 @@ -149,10 +149,12 @@
      varies across Unices and is stored in Python's Makefile.
      """
@@ -174,8 +174,8 @@ http://bugs.python.org/issue1222585
  
                              flags = _config_vars[key]
                              flags = re.sub('-isysroot\s+\S+(\s|$)', ' ', flags)
---- lib-python/2.7/distutils/sysconfig_pypy.py
-+++ lib-python/2.7/distutils/sysconfig_pypy.py
+--- a/lib-python/2.7/distutils/sysconfig_pypy.py
++++ b/lib-python/2.7/distutils/sysconfig_pypy.py
 @@ -123,7 +123,55 @@
      optional C speedup components.
      """
@@ -233,8 +233,8 @@ http://bugs.python.org/issue1222585
          compiler.shared_lib_extension = get_config_var('SO')
          if "CPPFLAGS" in os.environ:
              cppflags = shlex.split(os.environ["CPPFLAGS"])
---- lib-python/2.7/distutils/unixccompiler.py
-+++ lib-python/2.7/distutils/unixccompiler.py
+--- a/lib-python/2.7/distutils/unixccompiler.py
++++ b/lib-python/2.7/distutils/unixccompiler.py
 @@ -114,14 +114,17 @@
      # are pretty generic; they will probably have to be set by an outsider
      # (eg. using information discovered by the sysconfig about building
@@ -315,54 +315,3 @@ http://bugs.python.org/issue1222585
  
                  if sys.platform == 'darwin':
                      linker = _darwin_compiler_fixup(linker, ld_args)
---- lib-python/2.7/sysconfig.py.orig	2014-03-21 13:21:51.000000000 +0900
-+++ lib-python/2.7/sysconfig.py	2014-03-21 13:22:30.000000000 +0900
-@@ -34,7 +34,7 @@ _INSTALL_SCHEMES = {
-         'include': '{base}/include',
-         'platinclude': '{base}/include',
-         'scripts': '{base}/bin',
--        'data'   : '{base}',
-+        'data'   : '{pypybase}',
-         },
-     'nt': {
-         'stdlib': '{base}/Lib',
-@@ -306,6 +306,7 @@ def get_config_vars(*args):
-         _CONFIG_VARS['py_version_short'] = _PY_VERSION_SHORT
-         _CONFIG_VARS['py_version_nodot'] = _PY_VERSION[0] + _PY_VERSION[2]
-         _CONFIG_VARS['base'] = _PREFIX
-+        _CONFIG_VARS['pypybase'] = '/usr/share/'
-         _CONFIG_VARS['platbase'] = _EXEC_PREFIX
-         _CONFIG_VARS['projectbase'] = _PROJECT_BASE
- 
---- lib-python/2.7/distutils/sysconfig_pypy.py	2014-03-31 22:27:12.000000000 +0900
-+++ lib-python/2.7/distutils/sysconfig_pypy.py.orig	2014-03-31 10:13:05.000000000 +0900
-@@ -17,7 +17,8 @@ import shlex
- from distutils.errors import DistutilsPlatformError
- 
- 
--PREFIX = os.path.normpath(sys.prefix)
-+PREFIX = os.path.normpath(sys.prefix + '../../../')
-+print PREFIX
- EXEC_PREFIX = os.path.normpath(sys.exec_prefix)
- project_base = os.path.dirname(os.path.abspath(sys.executable))
- python_build = False
---- pypy/interpreter/app_main.py.orig	2014-04-01 19:56:36.000000000 +0900
-+++ pypy/interpreter/app_main.py	2014-04-01 19:57:58.000000000 +0900
-@@ -193,6 +193,8 @@ def _print_jit_help():
- 
- def print_version(*args):
-     print >> sys.stderr, "Python", sys.version
-+    sys.prefix = '/usr/share/'
-+    print >> sys.stderr, "Version", sys.prefix
-     raise SystemExit
- 
- 
-@@ -706,6 +708,8 @@ def setup_bootstrap_path(executable):
-         print >> sys.stderr, STDLIB_WARNING
-     else:
-         sys.path[:] = stdlib_path
-+    sys.prefix = '/usr/share/'
-+    print >> sys.stderr, "bootstrap_path", sys.prefix
-     # from this point on, we are free to use all the unicode stuff we want,
-     # This is important for py3k
-     sys.executable = executable

@@ -1,6 +1,78 @@
 # ChangeLog for dev-python/pypy
 # Copyright 1999-2014 Gentoo Foundation; Distributed under the GPL v2
-# $Header: /var/cvsroot/gentoo-x86/dev-python/pypy/ChangeLog,v 1.55 2014/03/12 09:14:21 mgorny Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-python/pypy/ChangeLog,v 1.71 2014/10/20 02:15:46 patrick Exp $
+
+*pypy-2.4.0 (20 Oct 2014)
+
+  20 Oct 2014; Patrick Lauer <patrick@gentoo.org> +pypy-2.4.0.ebuild:
+  Bump, keep keywords away until pypy-bin catches up
+
+*pypy-2.3.1-r1 (15 Jul 2014)
+
+  15 Jul 2014; Ian Delaney <idella4@gentoo.org> +files/2.3.1-shared-lib.patch,
+  +pypy-2.3.1-r1.ebuild, -pypy-2.3.1.ebuild:
+  revbump; patch to fix shared lib issue of libpypy-c.so wrt Bug #517002, thanks
+  to Arfrever for the patch which is submitted upstream
+
+  12 Jul 2014; Michał Górny <mgorny@gentoo.org> -pypy-2.3.ebuild,
+  pypy-2.3.1.ebuild:
+  Drop some random cruft, and localize LD_LIBRARY_PATH. Drop old.
+
+  06 Jul 2014; Michał Górny <mgorny@gentoo.org> pypy-2.0.2-r1.ebuild,
+  pypy-2.2.1.ebuild, pypy-2.3.ebuild:
+  Replace obsolete mirror://bitbucket with the real URI.
+
+*pypy-2.3.1 (18 Jun 2014)
+
+  18 Jun 2014; Ian Delaney <idella4@gentoo.org> +pypy-2.3.1.ebuild:
+  bump; add shared lib libpypy-c, prompt and initial patch by Y. Taraday in bug
+  #513014, closes said bug
+
+  18 May 2014; Mike Gilbert <floppym@gentoo.org> pypy-2.3.ebuild:
+  Remove cffi temporary files during installation.
+
+  16 May 2014; Michał Górny <mgorny@gentoo.org> -pypy-2.0.2.ebuild:
+  Remove old (slotted) version.
+
+*pypy-2.3 (15 May 2014)
+
+  15 May 2014; Mike Gilbert <floppym@gentoo.org>
+  +files/2.3-21_all_distutils_c++.patch, +pypy-2.3.ebuild:
+  Version bump.
+
+  14 May 2014; Mike Gilbert <floppym@gentoo.org> files/1.9-distutils.unixccompil
+  er.UnixCCompiler.runtime_library_dir_option.patch,
+  files/1.9-scripts-location.patch,
+  files/2.0.2-distutils-fix_handling_of_executables_and_flags.patch,
+  files/2.1-distutils-fix_handling_of_executables_and_flags.patch:
+  Normalize paths.
+
+  10 May 2014; Mike Gilbert <floppym@gentoo.org> pypy-2.2.1.ebuild:
+  Add optional dependency on dev-tcltk/tix, bug 413393.
+
+  09 May 2014; Michał Górny <mgorny@gentoo.org> pypy-2.2.1.ebuild:
+  Add USE=tk for tkinter modules. Update the list of cffi-compiled modules. Bug
+  #509794.
+
+  11 Apr 2014; Michał Górny <mgorny@gentoo.org> pypy-2.0.2-r1.ebuild,
+  pypy-2.2.1.ebuild:
+  Add a mutual blocker on pypy-bin.
+
+  31 Mar 2014; Michał Górny <mgorny@gentoo.org> pypy-2.0.2-r1.ebuild,
+  pypy-2.0.2.ebuild, pypy-2.2.1.ebuild:
+  Add support for the new PyPy slotting.
+
+*pypy-2.0.2-r1 (30 Mar 2014)
+
+  30 Mar 2014; Michał Górny <mgorny@gentoo.org> +pypy-2.0.2-r1.ebuild:
+  Backport the :0 slot switch to pypy-2.0.2 since we have binpackages for this
+  version.
+
+  18 Mar 2014; Michał Górny <mgorny@gentoo.org> -pypy-9999.ebuild:
+  Remove the live ebuild since it is outdated and not supported.
+
+  12 Mar 2014; Michał Górny <mgorny@gentoo.org> metadata.xml:
+  Add Alice Ferrazzi as proxy-maintainer.
 
   12 Mar 2014; Michał Górny <mgorny@gentoo.org> pypy-2.2.1.ebuild:
   Fix to be non-slotted.
@@ -126,7 +198,7 @@
   Add keywords.
 
   24 Dec 2012; Zac Medico <zmedico@gentoo.org> pypy-2.0_beta1.ebuild:
-  Add pypy pypy2_0 to PYTHON_COMPAT, since it appears to work.
+  Add pypy2_0 to PYTHON_COMPAT, since it appears to work.
 
 *pypy-2.0_beta1 (20 Dec 2012)
 
