@@ -13,7 +13,7 @@ SRC_URI="mirror://debian/pool/main/i/ikiwiki/${PN}_${PV}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="extras minimal test"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 
 S=${WORKDIR}/${PN}
 
@@ -87,7 +87,6 @@ DEPEND="${DEPEND}
 SRC_TEST=do
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PV}-match-word-boundary-for-get-perl-version.patch
 	#bug 498444 /usr/lib/plan9/lib/fortunes.index
 	addpredict "/usr/lib/plan9/lib/fortunes"
 
