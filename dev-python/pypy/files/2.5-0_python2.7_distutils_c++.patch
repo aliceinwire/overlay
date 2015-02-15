@@ -1,3 +1,5 @@
+http://bugs.python.org/issue1222585
+
 --- lib-python/2.7/distutils/cygwinccompiler.py.orig	2015-02-15 19:22:01.000000000 +0900
 +++ lib-python/2.7/distutils/cygwinccompiler.py	2015-02-15 19:28:02.000000000 +0900
 @@ -120,8 +120,10 @@ class CygwinCCompiler (UnixCCompiler):
