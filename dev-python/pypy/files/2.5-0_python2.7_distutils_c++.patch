@@ -304,7 +304,7 @@ http://bugs.python.org/issue1222585
 +            linker_exe=cc,
 +            linker_so_cxx=ldcxxshared,
 +            linker_exe_cxx=cxx)
-+       if "CPPFLAGS" in os.environ:
++        if "CPPFLAGS" in os.environ:
              cppflags = shlex.split(os.environ["CPPFLAGS"])
              compiler.compiler.extend(cppflags)
              compiler.compiler_so.extend(cppflags)
