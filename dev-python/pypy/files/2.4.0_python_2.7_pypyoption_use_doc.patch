@@ -1,0 +1,13 @@
+--- pypyoption.py.orig	2015-02-18 19:09:31.000000000 +0900
++++ pypyoption.py	2015-02-18 19:13:21.000000000 +0900
+@@ -344,7 +344,7 @@ def enable_translationmodules(config):
+ 
+ if __name__ == '__main__':
+     config = get_pypy_config()
+-    print config.getpaths()
+-    parser = to_optparse(config) #, useoptions=["translation.*"])
++    print(config.getpaths())
++    parser = to_optparse(config)  # , useoptions=["translation.*"])
+     option, args = parser.parse_args()
+-    print config
++    print(config)
